@@ -22,7 +22,7 @@
   
   <!-- Remaining Posts -->
   <div class="container">
-    <div class="row mt-4 gap-2 justify-content-center">
+    <div class="row mt-4 gap-4 justify-content-center">
       <div class="card col-md-3 col-sm-6 mb-4" *ngFor="let post of remainingPosts">
         <div class="card-body">
           <h5 class="card-title">{{ post.title }}</h5>
@@ -34,16 +34,13 @@
   </div>
    
   
-  <!-- Pagination -->
-  <nav aria-label="Page navigation" class="pagination-fixed">
-    <ul class="pagination">
-      <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
-        <a class="page-link " (click)="onPageChange(currentPage - 1)">Previous</a>
-      </li>
-      <li class="page-item" [ngClass]="{'disabled': remainingPosts.length === 0}">
-        <a class="page-link " (click)="onPageChange(currentPage + 1)">Next</a>
-      </li>
-    </ul>
-  </nav>
+<div class="paginator-wrapper">
+    <mat-paginator [length]="totalPosts"
+                   [pageSize]="postsPerPage"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   (page)="onPageChange($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+</div>
   
   

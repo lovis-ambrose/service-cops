@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { Observable } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';  // Import PageEvent
 
 @Component({
   selector: 'app-post',
@@ -13,13 +13,13 @@ export class PostComponent implements OnInit {
   firstPost: any;
   secondPost: any;
   remainingPosts: any[] = [];
-  currentPage = 1;
+  currentPage = 0;
   postsPerPage = 8;
+  totalPosts = 100;
 
   constructor(
     private postsService: ApiService
-  ){}
-
+  ) {}
 
   ngOnInit(): void {
     this.fetchPosts();
@@ -27,8 +27,8 @@ export class PostComponent implements OnInit {
 
   fetchPosts(): void {
     this.postsService.getPosts().subscribe(posts => {
-      const startIndex = (this.currentPage - 1) * this.postsPerPage;
-      const endIndex = this.currentPage * this.postsPerPage;
+      const startIndex = this.currentPage * this.postsPerPage;
+      const endIndex = startIndex + this.postsPerPage;
 
       // Split the posts into first, second, and remaining
       this.firstPost = posts[startIndex];
@@ -37,10 +37,10 @@ export class PostComponent implements OnInit {
     });
   }
 
-  onPageChange(page: number): void {
-    this.currentPage = page;
+  onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex;
+    this.postsPerPage = event.pageSize;
     this.fetchPosts();
   }
 
-  
 }

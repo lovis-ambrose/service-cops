@@ -1,10 +1,7 @@
-.pagination-fixed {
+.paginator-wrapper {
     position: fixed;
-    bottom: 0;
+    bottom: 20px;
     right: 20px;
-    z-index: 1000;
-  }
-  .page-link {
-    cursor: pointer;
+    z-index: 1000; /* Ensure it's on top of other elements */
   }
   
