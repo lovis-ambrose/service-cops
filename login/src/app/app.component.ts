@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -17,16 +17,27 @@ export class AppComponent {
   password: string = '';
   passwordFieldType: string = 'password';
 
+  loginForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[a-zA-Z]{2,7}$/)]],
+      password: ['', Validators.required]
+    });
+  }
+
   // Method to toggle password visibility
   togglePasswordVisibility() {
     this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
-  onSubmit(form: any) {
-    if (form.valid) {
-      console.log('Form Submitted', this.email, this.password);
+  onSubmit() {
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      console.log('Form Submitted', email, password);
     } else {
       console.log('Form Invalid');
+      this.loginForm.markAllAsTouched();
     }
   }
 }

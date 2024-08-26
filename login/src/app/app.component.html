@@ -2,23 +2,20 @@
   <div class="card p-4 shadow-lg" style="width: 400px; background-color: #000;">
     <h3 class="text-center text-light mb-4">Login</h3>
 
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <!-- Email/Username input -->
       <div class="form-group mb-3">
-        <label for="email" class="text-light">Email address or username</label>
+        <label for="email" class="text-light">Email address</label>
         <input 
           type="text" 
           class="form-control" 
           id="email" 
           placeholder="Enter email or username"
-          name="email" 
-          [(ngModel)]="email" 
-          #emailControl="ngModel" 
-          required 
-          [ngClass]="{'is-invalid': emailControl.invalid && emailControl.touched}">
-        <div *ngIf="emailControl.invalid && emailControl.touched" class="invalid-feedback">
-          <div *ngIf="emailControl.errors?.['required']">Email or username is required.</div>
-          <div *ngIf="emailControl.errors?.['pattern']">Enter a valid email address or username (min 4 characters).</div>
+          formControlName="email" 
+          [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="invalid-feedback">
+          <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
+          <div *ngIf="loginForm.get('email')?.errors?.['pattern']">Enter a valid email address.</div>
         </div>
       </div>
 
@@ -30,11 +27,8 @@
           class="form-control pr-5"  
           id="password" 
           placeholder="Password" 
-          name="password" 
-          [(ngModel)]="password" 
-          #passwordControl="ngModel" 
-          required 
-          [ngClass]="{'is-invalid': passwordControl.invalid && passwordControl.touched}">
+          formControlName="password" 
+          [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
           
         <!-- Show/Hide password button -->
         <button 
@@ -49,8 +43,8 @@
             <path d="M14.02 14.486a.5.5 0 0 0 .06-.707l-12-12a.5.5 0 0 0-.708.708l12 12a.5.5 0 0 0 .708-.001l-.06-.707zM8.034 2.354A7.501 7.501 0 0 1 16 8s-3 5.5-8 5.5S0 8 0 8s3-5.5 8-5.5a7.501 7.501 0 0 1 1.194.354l.84-.84z"/>
           </svg>
         </button>
-        <div *ngIf="passwordControl.invalid && passwordControl.touched" class="invalid-feedback">
-          <div *ngIf="passwordControl.errors?.['required']">Password is required.</div>
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="invalid-feedback">
+          <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
         </div>
       </div>
       
