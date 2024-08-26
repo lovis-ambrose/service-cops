@@ -16,6 +16,7 @@ export class PostComponent implements OnInit {
   currentPage = 0;
   postsPerPage = 8;
   totalPosts = 100;
+  selectedPost: any;
 
   constructor(
     private postsService: ApiService
@@ -41,6 +42,13 @@ export class PostComponent implements OnInit {
     this.currentPage = event.pageIndex;
     this.postsPerPage = event.pageSize;
     this.fetchPosts();
+  }
+
+  viewPost(postId: number): void {
+    this.postsService.getPost(postId).subscribe(post => {
+      this.selectedPost = post;
+      // Optionally, you can also redirect to a new page or display a modal
+    });
   }
 
 }

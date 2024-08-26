@@ -21,6 +21,7 @@ export class ApiService {
   getPost(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
+  
 
   createPost(post: any): Observable<any> {
     return this.http.post(this.baseUrl, post);

@@ -5,10 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
-import { AlbumComponent } from './album/album.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { PostDetailsComponent } from './post-details/post-details.component';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     AppComponent,
     HomeComponent,
     PostComponent,
-    AlbumComponent,
+    PostDetailsComponent,
   ],
   imports: [
     BrowserModule,
