@@ -1,0 +1,21 @@
+.form-group .btn-link {
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  input.form-control {
+    padding-right: 2.5rem;
+  }
+  
+  .form-group .btn-link svg {
+    pointer-events: none;
+  }
+  
+
+  .invalid-feedback {
+    display: block;
+    color: #dc3545; /* Bootstrap's danger color */
+  }
+  
+  
