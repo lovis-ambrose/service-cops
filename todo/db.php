@@ -1,7 +1,8 @@
 <?php
 const HOST = 'localhost';
-const USERNAME = 'root';
-const PASSWORD = 'password';
+// make sure to update these fields according to your local variables setup
+const USERNAME = 'mysql_username';
+const PASSWORD = 'your_local_env_password';
 const DBNAME = 'todo';
 $dbcon = new mysqli(HOST, USERNAME, PASSWORD, DBNAME);
 
