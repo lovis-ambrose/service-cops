@@ -10,9 +10,11 @@ import { Observable } from 'rxjs';
 export class PostComponent implements OnInit {
 
   posts: any[] = [];
+  firstPost: any;
+  secondPost: any;
+  remainingPosts: any[] = [];
   currentPage = 1;
-  totalPosts = 0;
-  postsPerPage = 10;
+  postsPerPage = 8;
 
   constructor(
     private postsService: ApiService
@@ -25,9 +27,13 @@ export class PostComponent implements OnInit {
 
   fetchPosts(): void {
     this.postsService.getPosts().subscribe(posts => {
-      console.log(posts);
-      this.totalPosts = posts.length;
-      this.posts = posts.slice((this.currentPage - 1) * this.postsPerPage, this.currentPage * this.postsPerPage);
+      const startIndex = (this.currentPage - 1) * this.postsPerPage;
+      const endIndex = this.currentPage * this.postsPerPage;
+
+      // Split the posts into first, second, and remaining
+      this.firstPost = posts[startIndex];
+      this.secondPost = posts[startIndex + 1];
+      this.remainingPosts = posts.slice(startIndex + 2, endIndex);
     });
   }
 
