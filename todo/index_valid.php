@@ -1,27 +1,21 @@
 <?php
 session_start();
-require_once "db.php";
+require_once 'db.php';
 
 if (isset($_POST['addtask'])) {
-    // Get the task name and description from the form
-    $task_name = $_POST['task_name'];
-    $task_description = $_POST['task_description'];
+    $task_name = htmlspecialchars($_POST['task_name']);
+    $task_description = htmlspecialchars($_POST['task_description']);
+    $user_id = $_SESSION['user_id']; // Get the logged-in user's ID
 
-    // Get the current date and time
-    $added_time = date('Y-m-d H:i:s');
-
-    // Insert the task into the database
-    $query = "INSERT INTO task_table (task_name, task_description, added_tiime) VALUES (?, ?, ?)";
+    // Insert the new task into the database
+    $query = "INSERT INTO task_table (task_name, task_description, user_id) VALUES (?, ?, ?)";
     $stmt = $dbcon->prepare($query);
-    $stmt->bind_param("sss", $task_name, $task_description, $added_time);
-
+    $stmt->bind_param("ssi", $task_name, $task_description, $user_id);
     if ($stmt->execute()) {
-        $_SESSION['task_add_success'] = "Task added successfully!";
+        $_SESSION['task_success'] = "Task added successfully!";
     } else {
-        $_SESSION['task_add_error'] = "Failed to add task. Please try again.";
+        $_SESSION['task_error'] = "Failed to add task.";
     }
-
-    // Redirect back to the main page
     header("Location: index.php");
     exit();
 }

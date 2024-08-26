@@ -1,20 +1,19 @@
 <?php
 session_start();
-require_once "db.php";
-if (isset($_GET['id'])) {
-  $id = base64_decode($_GET['id']);
-  $delete_query = "DELETE FROM task_table WHERE id=$id";
-  $delete_query;
-  $run_query = $dbcon->query($delete_query);
-  if($run_query){
-    $_SESSION['delete_success'] = "Task delete successfully";
-}
+require_once 'db.php';
 
+$id = base64_decode($_GET['id']);
+$user_id = $_SESSION['user_id']; // Get the logged-in user's ID
 
-header('location: index.php');
+// Check if the task belongs to the user
+$query = "DELETE FROM task_table WHERE id=? AND user_id=?";
+$stmt = $dbcon->prepare($query);
+$stmt->bind_param("ii", $id, $user_id);
+if ($stmt->execute()) {
+    $_SESSION['delete_success'] = "Task deleted successfully!";
+} else {
+    $_SESSION['delete_error'] = "Failed to delete task.";
 }
-else{
-  header('location: index.php');
-}
-
+header('Location: index.php');
+exit();
 ?>

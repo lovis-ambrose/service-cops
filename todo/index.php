@@ -10,14 +10,14 @@ if (!isset($_SESSION['user_id'])) {
 ?>
 
 <div class="container">
-<!-- logout -->
-<div class="row">
+  <!-- Logout Button -->
+  <div class="row">
     <div class="col-12 text-right mt-3">
       <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
   </div>
 
-
+  <!-- Add Task Button and Modal -->
   <div class="row">
     <div class="col-8 m-auto">
       <h2 class="display-4 text-center">My To Do List</h2>
@@ -59,17 +59,17 @@ if (!isset($_SESSION['user_id'])) {
 
   <!-- ===================== show delete alert message ============= -->
   <?php if(isset($_SESSION['delete_success'])) { ?>
-    <div class="alert alert-warning text-dark  mx-auto mt-4" role="alert" style="width:66%;">
+    <div class="alert alert-warning text-dark mx-auto mt-4" role="alert" style="width:66%;">
       <?=$_SESSION['delete_success'];?>
     </div>
     <?php unset($_SESSION['delete_success']); } ?>
 
   <!-- ===================== show update alert message ============= -->
-  <?php if(isset($_SESSION['upadate_success'])) { ?>
-    <div class="alert alert-warning text-dark  mx-auto mt-4" role="alert" style="width:66%;">
-      <?=$_SESSION['upadate_success'];?>
+  <?php if(isset($_SESSION['update_success'])) { ?>
+    <div class="alert alert-warning text-dark mx-auto mt-4" role="alert" style="width:66%;">
+      <?=$_SESSION['update_success'];?>
     </div>
-    <?php unset($_SESSION['upadate_success']); } ?>
+    <?php unset($_SESSION['update_success']); } ?>
 
   <!-- =================================== table =========================== -->
   <table style="width:66%;" class="table table-sm table-borderless table-striped text-center mx-auto mt-3">
@@ -85,9 +85,16 @@ if (!isset($_SESSION['user_id'])) {
 
     <?php
     require_once "db.php";
-    $task_show_query = "SELECT * FROM task_table";
-    $result = $dbcon->query($task_show_query);
-    if($result->num_rows != 0){
+    $user_id = $_SESSION['user_id']; // Get the logged-in user's ID
+
+    // Fetch tasks specific to the logged-in user
+    $task_show_query = "SELECT * FROM task_table WHERE user_id=?";
+    $stmt = $dbcon->prepare($task_show_query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows != 0) {
       $serial = 1;
       foreach ($result as $row) {
         $temp_date_time = explode(' ', $row['added_tiime']);
