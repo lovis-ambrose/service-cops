@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { forkJoin } from 'rxjs';
+import { PostActionComponent } from '../post-action/post-action.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-post-details',
@@ -17,7 +19,8 @@ export class PostDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private postsService: ApiService
+    private postsService: ApiService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -39,5 +42,21 @@ export class PostDetailsComponent implements OnInit {
         });
       }
     });
+  }
+
+  openUpdateDialog() {
+    this.dialog.open(PostActionComponent, {
+      data: { action: 'update', post: this.post }
+    });
+  }
+
+  openPatchDialog() {
+    this.dialog.open(PostActionComponent, {
+      data: { action: 'patch', post: this.post }
+    });
+  }
+
+  deletePost() {
+    throw new Error('Method not implemented.');
   }
 }

@@ -13,9 +13,9 @@ export class NavBarComponent {
   ) {}
 
 
-  openActionsDialog(): void {
+  openAddDialog() {
     this.dialog.open(PostActionComponent, {
-      data: {}
+      data: { action: 'add' }
     });
   }
 }

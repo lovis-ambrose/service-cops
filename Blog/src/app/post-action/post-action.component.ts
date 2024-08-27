@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-post-action',
@@ -13,12 +13,27 @@ export class PostActionComponent {
   };
 
   constructor(
-    public dialogRef: MatDialogRef<PostActionComponent>
-  ) {}
+    public dialogRef: MatDialogRef<PostActionComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    if (data.post) {
+      this.post = data.post;  // populate the form for update/patch if post data is provided
+    }
+  }
+
+
+  patchPost(): void {
+    // to-do: Patch post logic
+    this.dialogRef.close(this.post);
+  }
+
+  updatePost(): void {
+    // to-do: Update post logic
+    this.dialogRef.close(this.post);
+  }
 
   onSave(): void {
-    // to-do Save
-
+    // to-do: Add post logic
     this.dialogRef.close(this.post);
   }
 
