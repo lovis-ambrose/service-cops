@@ -29,6 +29,10 @@ export class ApiService {
     return this.http.put(`${this.postsUrl}/${id}`, post);
   }
 
+  patchPost(id: number, partialData: any): Observable<any> {
+    return this.http.patch(`${this.postsUrl}/${id}`, partialData);
+  }
+
   deletePost(id: number): Observable<any> {
     return this.http.delete(`${this.postsUrl}/${id}`);
   }

@@ -5,21 +5,21 @@
 <div class="container mt-4">
   <div *ngIf="post" class="card">
     <!-- Post Image -->
-    <img [src]="photoUrl" class="card-img-top" alt="Post Image">
+    <img [src]="photoUrl" class="card-img-top"[height]="500" alt="Post Image">
     
     <!-- Post Content -->
     <div class="card-body">
       <h2 class="card-title">{{ post.title }}</h2>
+      <!-- Post Author -->
+      <div class="card-footer">
+        <p><strong>Author:</strong> {{ author?.name }} ({{ author?.email }})</p>
+        <p><strong>Website:</strong> <a href="http://{{ author?.website }}" target="_blank">{{ author?.website }}</a></p>
+        <p><strong>Company:</strong> {{ author?.company?.name }} - {{ author?.company?.catchPhrase }}</p>
+      </div>
+    </div>
       <p class="card-text">{{ post.body }}</p>
-    </div>
-
-    <!-- Post Author -->
-    <div class="card-footer">
-      <p><strong>Author:</strong> {{ author?.name }} ({{ author?.email }})</p>
-      <p><strong>Website:</strong> <a href="http://{{ author?.website }}" target="_blank">{{ author?.website }}</a></p>
-      <p><strong>Company:</strong> {{ author?.company?.name }} - {{ author?.company?.catchPhrase }}</p>
-    </div>
   </div>
+
 
   <!-- Post Comments Section -->
   <div class="comments-section mt-4">
@@ -31,4 +31,18 @@
       </div>
     </div>
   </div>
+
+  <!-- Actions section -->
+  <div class="button-container">
+    <button type="button" class="btn btn-primary" title="Update Post">
+      <i class="bi bi-pencil"></i>
+    </button>
+    <button type="button" class="btn btn-warning" title="Patch Post">
+      <i class="bi bi-pencil-square"></i>
+    </button>
+    <button type="button" class="btn btn-danger" title="Delete Post">
+      <i class="bi bi-trash"></i> 
+    </button>
+  </div>
+
 </div>

@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Add Post</h2>
+<mat-dialog-content>
+  <form class="post-form">
+    <div class="form-row">
+      <!-- Title Field -->
+      <mat-form-field class="full-width">
+        <mat-label>Title</mat-label>
+        <!-- Ensure matInput directive is present -->
+        <input matInput [(ngModel)]="post.title" name="title" placeholder="Enter title" required>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <!-- Body Field -->
+      <mat-form-field class="full-width">
+        <mat-label>Body</mat-label>
+        <!-- Ensure matInput directive is present -->
+        <textarea matInput [(ngModel)]="post.body" name="body" placeholder="Enter body" required></textarea>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<!-- Actions -->
+<mat-dialog-actions class="align-end">
+  <button mat-button (click)="onCancel()" color="warn">Cancel</button>
+  <button mat-button (click)="onSave()" color="primary">Save</button>
+</mat-dialog-actions>

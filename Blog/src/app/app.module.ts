@@ -10,6 +10,10 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { NavBarComponent } from './home/nav-bar/nav-bar.component';
+import { PostActionComponent } from './post-action/post-action.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -19,11 +23,15 @@ import { NavBarComponent } from './home/nav-bar/nav-bar.component';
     PostComponent,
     PostDetailsComponent,
     NavBarComponent,
+    PostActionComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatPaginatorModule,
+    MatDialogModule,
+    FormsModule,
+    MatFormFieldModule
   ],
   providers: [
     provideAnimationsAsync(),
