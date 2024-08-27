@@ -1,9 +1,34 @@
+<div class="container sticky-top">
+  <app-nav-bar></app-nav-bar>
+</div>
+
 <div class="container mt-4">
-    <div *ngIf="post" class="card">
+  <div *ngIf="post" class="card">
+    <!-- Post Image -->
+    <img [src]="photoUrl" class="card-img-top" alt="Post Image">
+    
+    <!-- Post Content -->
+    <div class="card-body">
+      <h2 class="card-title">{{ post.title }}</h2>
+      <p class="card-text">{{ post.body }}</p>
+    </div>
+
+    <!-- Post Author -->
+    <div class="card-footer">
+      <p><strong>Author:</strong> {{ author?.name }} ({{ author?.email }})</p>
+      <p><strong>Website:</strong> <a href="http://{{ author?.website }}" target="_blank">{{ author?.website }}</a></p>
+      <p><strong>Company:</strong> {{ author?.company?.name }} - {{ author?.company?.catchPhrase }}</p>
+    </div>
+  </div>
+
+  <!-- Post Comments Section -->
+  <div class="comments-section mt-4">
+    <h3>Comments</h3>
+    <div *ngFor="let comment of comments" class="card mb-3">
       <div class="card-body">
-        <h2 class="card-title">{{ post.title }}</h2>
-        <p class="card-text">{{ post.body }}</p>
-        <a routerLink="/" class="btn btn-secondary">Back to Posts</a>
+        <h5 class="card-title">{{ comment.name }} <small>({{ comment.email }})</small></h5>
+        <p class="card-text">{{ comment.body }}</p>
       </div>
     </div>
-  </div>  
+  </div>
+</div>

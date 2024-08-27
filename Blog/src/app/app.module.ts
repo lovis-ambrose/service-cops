@@ -9,6 +9,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { NavBarComponent } from './home/nav-bar/nav-bar.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { PostDetailsComponent } from './post-details/post-details.component';
     HomeComponent,
     PostComponent,
     PostDetailsComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
