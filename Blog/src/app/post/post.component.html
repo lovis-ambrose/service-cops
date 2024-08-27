@@ -1,7 +1,7 @@
 <div class="row gap-5 mt-4">
     <!-- First Post -->
     <div class="card col-md-8" *ngIf="firstPost">
-      <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
+      <img [src]="firstPost.photoUrl || 'https://via.placeholder.com/300x200'" class="card-img-top" alt="Post Image">
       <div class="card-body">
         <h5 class="card-title">{{ firstPost.title }}</h5>
         <p class="card-text">{{ firstPost.body }}</p>
@@ -11,14 +11,14 @@
   
     <!-- Second Post -->
     <div class="card col-md-3" *ngIf="secondPost">
-    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
+      <img [src]="secondPost.photoUrl || 'https://via.placeholder.com/300x200'" class="card-img-top" alt="Post Image">
       <div class="card-body">
         <h5 class="card-title">{{ secondPost.title }}</h5>
         <p class="card-text">{{ secondPost.body }}</p>
         <button (click)="viewPost(secondPost.id)" class="btn btn-primary">Read More</button>
       </div>
     </div>
-</div>
+</div>  
   
   <!-- Remaining Posts -->
   <div class="container">

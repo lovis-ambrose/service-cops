@@ -36,7 +36,20 @@
         this.firstPost = posts[startIndex];
         this.secondPost = posts[startIndex + 1];
         this.remainingPosts = posts.slice(startIndex + 2, endIndex);
+
+        // Fetch photos for first and second posts
+        this.fetchPostPhoto(this.firstPost);
+        this.fetchPostPhoto(this.secondPost);
+        this.remainingPosts.forEach(post => this.fetchPostPhoto(post));
       });
+    }
+
+    fetchPostPhoto(post: any): void {
+      if (post) {
+        this.postsService.getPhotoForPost(post.id).subscribe(photo => {
+          post.photoUrl = photo?.url || 'https://via.placeholder.com/300x200';  // Set default placeholder
+        });
+      }
     }
 
     onPageChange(event: PageEvent): void {

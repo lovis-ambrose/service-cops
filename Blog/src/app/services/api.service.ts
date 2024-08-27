@@ -10,6 +10,7 @@ export class ApiService {
   private postsUrl = 'https://jsonplaceholder.typicode.com/posts';
   private photosUrl = 'https://jsonplaceholder.typicode.com/photos';
   private commentsUrl = 'https://jsonplaceholder.typicode.com/posts/1/comments';
+  private usersUrl = 'https://jsonplaceholder.typicode.com/users';
 
   constructor(
     private http: HttpClient,
@@ -18,8 +19,8 @@ export class ApiService {
 
   getPosts(): Observable<any> {
     return this.http.get(this.postsUrl);
-  }
-  
+  }  
+
   createPost(post: any): Observable<any> {
     return this.http.post(this.postsUrl, post);
   }
@@ -35,15 +36,16 @@ export class ApiService {
   getPost(postId: number): Observable<any> {
     return this.http.get(`${this.postsUrl}/${postId}`);
   }
+
   getCommentsForPost(postId: number): Observable<any> {
-    return this.http.get(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`);
+    return this.http.get(`${this.commentsUrl}?postId=${postId}`);
   }
 
   getUsers(): Observable<any> {
-    return this.http.get('https://jsonplaceholder.typicode.com/users');
+    return this.http.get(this.usersUrl);
   }
 
   getPhotoForPost(postId: number): Observable<any> {
-    return this.http.get(`https://jsonplaceholder.typicode.com/photos/${postId}`);
+    return this.http.get(`${this.photosUrl}/${postId}`);
   }
 }
