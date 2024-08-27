@@ -7,27 +7,22 @@ import { ApiService } from '../services/api.service';
   templateUrl: './post-details.component.html',
   styleUrl: './post-details.component.scss'
 })
-export class PostDetailsComponent implements OnInit{
-
+export class PostDetailsComponent implements OnInit {
   post: any;
 
   constructor(
     private route: ActivatedRoute,
-    private apiService: ApiService
+    private postsService: ApiService
   ) {}
 
-  
   ngOnInit(): void {
-    this.fetchPost();
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.postsService.getPost(+id).subscribe(post => {
+          this.post = post;
+        });
+      }
+    });
   }
-
-  fetchPost(): void {
-    const postId = this.route.snapshot.paramMap.get('id');
-    if (postId) {
-      this.apiService.getPost(+postId).subscribe(post => {
-        this.post = post;
-      });
-    }
-  }
-
 }

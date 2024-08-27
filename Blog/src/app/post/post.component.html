@@ -5,7 +5,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ firstPost.title }}</h5>
         <p class="card-text">{{ firstPost.body }}</p>
-        <button class="btn btn-primary" (click)="viewPost(firstPost.id)">Read More</button>
+        <a [routerLink]="['/posts', firstPost.id]" class="btn btn-primary">Read More</a>
       </div>
     </div>
   
@@ -15,10 +15,10 @@
       <div class="card-body">
         <h5 class="card-title">{{ secondPost.title }}</h5>
         <p class="card-text">{{ secondPost.body }}</p>
-        <button class="btn btn-primary" (click)="viewPost(secondPost.id)">Read More</button>
+        <button (click)="viewPost(secondPost.id)" class="btn btn-primary">Read More</button>
       </div>
     </div>
-  </div>
+</div>
   
   <!-- Remaining Posts -->
   <div class="container">
@@ -27,7 +27,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ post.title }}</h5>
           <p class="card-text">{{ post.body }}</p>
-          <button class="btn btn-primary" (click)="viewPost(post.id)">Read More</button>
+          <button (click)="viewPost(post.id)" class="btn btn-primary">Read More</button>
         </div>
       </div>
     </div>
@@ -41,12 +41,6 @@
                    (page)="onPageChange($event)"
                    aria-label="Select page">
     </mat-paginator>
-</div>
-
-<div *ngIf="selectedPost" class="selected-post">
-  <h2>{{ selectedPost.title }}</h2>
-  <p>{{ selectedPost.body }}</p>
-  <button (click)="selectedPost = null" class="btn btn-secondary">Close</button>
 </div>
   
   

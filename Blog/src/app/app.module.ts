@@ -21,7 +21,7 @@ import { PostDetailsComponent } from './post-details/post-details.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   providers: [
     provideAnimationsAsync(),

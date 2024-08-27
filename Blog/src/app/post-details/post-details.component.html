@@ -1,8 +1,9 @@
-<div class="container mt-5">
-    <div *ngIf="post">
-      <h1>{{ post.title }}</h1>
-      <p>{{ post.body }}</p>
-      <a routerLink="/" class="btn btn-primary">Back to Posts</a>
+<div class="container mt-4">
+    <div *ngIf="post" class="card">
+      <div class="card-body">
+        <h2 class="card-title">{{ post.title }}</h2>
+        <p class="card-text">{{ post.body }}</p>
+        <a routerLink="/" class="btn btn-secondary">Back to Posts</a>
+      </div>
     </div>
-  </div>
-  
+  </div>  
